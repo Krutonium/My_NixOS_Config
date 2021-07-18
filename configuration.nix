@@ -97,15 +97,22 @@
     tdesktop
     discord
     jetbrains.rider
-    gnome.gnome-tweaks
-    gnomeExtensions.arcmenu
-    gnomeExtensions.ddterm
-    gnomeExtensions.launch-new-instance
-    gnomeExtensions.native-window-placement
-    gnomeExtensions.openweather
-    gnomeExtensions.window-is-ready-remover
-    gnomeExtensions.appindicator
-    gnomeExtensions.dash-to-panel
+    #gnome.gnome-tweaks
+    #gnomeExtensions.arcmenu
+    #gnomeExtensions.ddterm
+    #gnomeExtensions.launch-new-instance
+    #gnomeExtensions.native-window-placement
+    #gnomeExtensions.openweather
+    #gnomeExtensions.window-is-ready-remover
+    #gnomeExtensions.appindicator
+    #gnomeExtensions.dash-to-panel
+    #Gnome 40 is too new for the packaged versions
+    multimc
+    git
+    obs-studio
+    htop
+    neofetch
+    arc-theme
   ];
 
   networking.extraHosts = 
@@ -116,7 +123,13 @@
   programs.steam.enable = true;
   hardware.steam-hardware.enable = true;
   services.xserver.videoDrivers = [ "modesetting" ];
-  #hardware.bumblebee.enable = true;
+  #hardware.nvidia.modesetting.enable = true;
+  
+  #hardware.nvidia.prime.sync.enable = true;
+  #hardware.nvidia.prime.intelBusId = "PCI:1:0:0";
+  #hardware.nvidia.prime.nvidiaBusId = "PCI:0:2:0";
+  
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
