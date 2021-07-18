@@ -96,6 +96,16 @@
     firefox
     tdesktop
     discord
+    jetbrains.rider
+    gnome.gnome-tweaks
+    gnomeExtensions.arcmenu
+    gnomeExtensions.ddterm
+    gnomeExtensions.launch-new-instance
+    gnomeExtensions.native-window-placement
+    gnomeExtensions.openweather
+    gnomeExtensions.window-is-ready-remover
+    gnomeExtensions.appindicator
+    gnomeExtensions.dash-to-panel
   ];
 
   networking.extraHosts = 
@@ -104,7 +114,9 @@
     '';
 
   programs.steam.enable = true;
+  hardware.steam-hardware.enable = true;
   services.xserver.videoDrivers = [ "modesetting" ];
+  #hardware.bumblebee.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -132,6 +144,7 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "unstable"; # Did you read the comment?
-
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.allowReboot = true;
 }
 
