@@ -113,6 +113,7 @@
     htop
     neofetch
     arc-theme
+    dotnet-sdk_5
   ];
 
   networking.extraHosts = 
@@ -159,6 +160,6 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "unstable"; # Did you read the comment?
   system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = true;
+  system.autoUpgrade.allowReboot = false;
 }
 
