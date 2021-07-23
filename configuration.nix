@@ -115,6 +115,7 @@
     arc-theme
     dotnet-sdk_5
     youtube-dl
+    etcher
   ];
 
   networking.extraHosts = 
