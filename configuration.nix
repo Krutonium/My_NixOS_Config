@@ -114,6 +114,7 @@
     neofetch
     arc-theme
     dotnet-sdk_5
+    youtube-dl
   ];
 
   networking.extraHosts = 
@@ -124,6 +125,7 @@
   programs.steam.enable = true;
   hardware.steam-hardware.enable = true;
   services.xserver.videoDrivers = [ "modesetting" ];
+  hardware.opengl.driSupport = true;
   #hardware.bumblebee.enable = true;
   #hardware.nvidia.modesetting.enable = true;
   
