@@ -3,13 +3,14 @@
 {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  nixpkgs.config.allowUnfree = true;  
+  nixpkgs.config.allowUnfree = true; 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "krutonium";
   home.homeDirectory = "/home/krutonium";
   home.sessionVariables.EDITOR = "nano";
   home.sessionVariables.VISUAL = "nano";
+  home.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
   programs.bash.enable = true;
   programs.git = {
     enable = true;
@@ -35,6 +36,8 @@
     pkgs.mono
     pkgs.htop
     pkgs.neofetch
+    pkgs.gnomeExtensions.appindicator
+    pkgs.wine
   ];
   
   # This value determines the Home Manager release that your

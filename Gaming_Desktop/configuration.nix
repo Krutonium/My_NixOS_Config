@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -49,7 +48,16 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
+  hardware.nvidia.modesetting.enable = true;
+  programs.xwayland.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;
+  services.xserver.displayManager.gdm.nvidiaWayland = true;
+  hardware.opengl.enable = true;
+  
+  #Enable nVidia with AMD as Primary
+  services.xserver.videoDrivers = [ "amdgpu" ];
+  boot.extraModulePackages = [ pkgs.linuxPackages.nvidia_x11 ];
+  boot.blacklistedKernelModules =  [ "nouveau" "nvidia_drm" "nvidia_modeset" "nvidia" ];
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
@@ -90,6 +98,7 @@
   environment.systemPackages = with pkgs; [
     nano # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     chrome-gnome-shell
+    linuxPackages.nvidia_x11
   ];
   programs.steam.enable = true;
   
