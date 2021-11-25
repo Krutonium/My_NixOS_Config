@@ -3,11 +3,13 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
+let
+   kernel = pkgs.linuxPackages;
+in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      <home-manager/nixos>
     ];
   nixpkgs.config.allowUnfree = true;
   # Use the systemd-boot EFI boot loader.
@@ -22,6 +24,7 @@
   boot.kernelParams = [ "iommu=soft" ];	
   #VL805 Bug
   boot.kernelModules = [ "amdgpu" ];
+  boot.kernelPackages = kernel;
   networking.hostName = "nixos-desktop"; # Define your hostname.
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
 
@@ -56,8 +59,8 @@
   
   #Enable nVidia with AMD as Primary
   services.xserver.videoDrivers = [ "amdgpu" ];
-  boot.extraModulePackages = [ pkgs.linuxPackages.nvidia_x11 ];
-  boot.blacklistedKernelModules =  [ "nouveau" "nvidia_drm" "nvidia_modeset" "nvidia" ];
+  boot.extraModulePackages = [ kernel.nvidia_x11 ];
+  boot.blacklistedKernelModules =  [ "nouveau" "nvidia_drm" "nvidia_modeset" ]; #nvidia	
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
@@ -99,6 +102,7 @@
     nano # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     chrome-gnome-shell
     linuxPackages.nvidia_x11
+    home-manager
   ];
   programs.steam.enable = true;
   

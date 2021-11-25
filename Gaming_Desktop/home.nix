@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
-
+let
+  unstable = import
+  (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/nixpkgs-unstable)
+  # reuse the current configuration
+  {config = config.nixpkgs.config;};
+in
 {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -38,6 +43,13 @@
     pkgs.neofetch
     pkgs.gnomeExtensions.appindicator
     pkgs.wine
+    pkgs.obs-studio
+    pkgs.dropbox
+    pkgs.lutris
+    pkgs.mangohud
+    unstable.goverlay
+    unstable.openrct2
+    pkgs.vlc
   ];
   
   # This value determines the Home Manager release that your
