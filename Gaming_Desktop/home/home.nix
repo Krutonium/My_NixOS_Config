@@ -64,15 +64,10 @@ in
   # Theme
   gtk.enable = true;
   gtk.theme.name = "Arc-Dark";
-   
+
+  fonts.fontconfig.enable = true;
+  #fonts.fontconfig.defaultFonts.serif = "Ubuntu Regular";
   
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
+  #What version of Home Manager this config file was created at.
   home.stateVersion = "21.05";
 }
