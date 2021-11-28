@@ -47,6 +47,7 @@ in
     unstable.openrct2
     pkgs.vlc
     pkgs.nanorc
+    unstable.openrgb
   ];
 
 
