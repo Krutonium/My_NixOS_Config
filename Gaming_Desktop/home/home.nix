@@ -57,7 +57,7 @@ in
   programs.git = {
     enable = true;
     userName = "Krutonium";
-    userEmail = "PFCKrutonium";
+    userEmail = "PFCKrutonium@gmail.com";
   }; 
   
   # Theme
