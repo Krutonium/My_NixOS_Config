@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 let
-  unstable = import
-  (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/nixpkgs-unstable)
+  unstable = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/nixpkgs-unstable)
   # reuse the current configuration
   {config = config.nixpkgs.config;};
 in
@@ -9,6 +8,7 @@ in
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   nixpkgs.config.allowUnfree = true; 
+  targets.genericLinux.enable = true; #Fix Icons?
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "krutonium";
@@ -17,13 +17,8 @@ in
   home.sessionVariables.VISUAL = "nano";
   home.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
   programs.bash.enable = true;
-  programs.git = {
-    enable = true;
-    userName = "Krutonium";
-    userEmail = "PFCKrutonium@gmail.com";
-  };
-  # 81a207c0-a53c-46a3-be07-57d2b28c1643 Microsoft Client ID for MultiMC
-  #These are the packages installed in my home directory
+
+  #Install our Packages
   home.packages = [ 
     pkgs.kotatogram-desktop 
     pkgs.discord 
@@ -47,10 +42,28 @@ in
     pkgs.dropbox
     pkgs.lutris
     pkgs.mangohud
+    (pkgs.multimc.override { msaClientID = "81a207c0-a53c-46a3-be07-57d2b28c1643"; })
     unstable.goverlay
     unstable.openrct2
     pkgs.vlc
+    pkgs.nanorc
   ];
+
+
+  # Set up Dotfiles
+  # Programs not explicitly supported can be done like this:
+  home.file.".nanorc".source = ./config/nano.cfg;
+  #Supported Programs like this:
+  programs.git = {
+    enable = true;
+    userName = "Krutonium";
+    userEmail = "PFCKrutonium";
+  }; 
+  
+  # Theme
+  gtk.enable = true;
+  gtk.theme.name = "Arc-Dark";
+   
   
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
