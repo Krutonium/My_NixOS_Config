@@ -13,6 +13,9 @@ in
     ];
   nixpkgs.config.allowUnfree = true;
   # Use the systemd-boot EFI boot loader.
+  boot.initrd.supportedFilesystems = [ "zfs" ];
+  boot.supportedFilesystems = [ "zfs" ];
+  networking.hostId = "27c52aa1";
   boot.loader.efi.efiSysMountPoint = "/boot";
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub = {
@@ -104,6 +107,7 @@ in
     chrome-gnome-shell
     linuxPackages.nvidia_x11
     home-manager
+    zfs
   ];
   programs.steam.enable = true;
   
