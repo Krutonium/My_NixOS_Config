@@ -20,6 +20,7 @@ in
     efiSupport = true;
     enable = true;
     useOSProber = true;
+    default = "saved";
   };
   boot.kernelParams = [ "iommu=soft" ];	
   #VL805 Bug
