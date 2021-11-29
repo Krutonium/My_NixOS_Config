@@ -55,6 +55,8 @@ in
   # Set up Dotfiles
   # Programs not explicitly supported can be done like this:
   home.file.".nanorc".source = ./config/nano.cfg;
+  home.file.".config/OpenRCT2/config.ini".source = ./config/openrct2.conf;
+  home.file."home.nix".source = ./home.nix;
   #Supported Programs like this:
   programs.git = {
     enable = true;

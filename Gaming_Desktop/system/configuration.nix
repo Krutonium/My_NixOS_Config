@@ -32,6 +32,11 @@ in
   networking.hostName = "nixos-desktop"; # Define your hostname.
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   systemd.enableEmergencyMode = false; # Disable Emergency Mode
+
+  swapDevices = [{
+    device = "/swap";
+    size = 1024 * 8; #8GB
+  }];
   
   systemd.services = {
     zfs-mount = {
