@@ -31,7 +31,15 @@ in
   boot.kernelPackages = kernel;
   networking.hostName = "nixos-desktop"; # Define your hostname.
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
-
+  systemd.enableEmergencyMode = false; # Disable Emergency Mode
+  
+  systemd.services = {
+    zfs-mount = {
+      enable = false;
+      restartIfChanged = false;
+    };
+  };
+  
   # Set your time zone.
   time.timeZone = "America/Toronto";
 

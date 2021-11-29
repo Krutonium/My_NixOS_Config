@@ -48,6 +48,7 @@ in
     pkgs.vlc
     pkgs.nanorc
     unstable.openrgb
+    pkgs.iconpack-obsidian
   ];
 
 
@@ -63,9 +64,11 @@ in
   
   # Theme
   gtk.enable = true;
-  gtk.theme.name = "Arc-Dark";
-
-  fonts.fontconfig.enable = true;
+  gtk.theme.name = "Sweet-Dark";
+  # Icons?
+  # Fonts?
+  # Cursors?
+  #fonts.fontconfig.enable = true;
   #fonts.fontconfig.defaultFonts.serif = "Ubuntu Regular";
   
   #What version of Home Manager this config file was created at.
