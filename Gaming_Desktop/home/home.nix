@@ -3,6 +3,7 @@ let
   unstable = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/nixpkgs-unstable)
   # reuse the current configuration
   {config = config.nixpkgs.config;};
+ 
 in
 {
   # Let Home Manager install and manage itself.
@@ -54,9 +55,9 @@ in
 
   # Set up Dotfiles
   # Programs not explicitly supported can be done like this:
-  home.file.".nanorc".source = ./config/nano.cfg;
-  home.file.".config/OpenRCT2/config.ini".source = ./config/openrct2.conf;
-  home.file."home.nix".source = ./home.nix;
+  #home.file.".nanorc".source = mkLink.to "./config/nano.cfg";
+  #home.file.".config/OpenRCT2/config.ini".source = mkLink.to "./config/openrct2.conf";
+  #home.file."home.nix".source = mkLink.to "./home.nix";
   #Supported Programs like this:
   programs.git = {
     enable = true;
@@ -67,11 +68,9 @@ in
   # Theme
   gtk.enable = true;
   gtk.theme.name = "Sweet-Dark";
-  # Icons?
-  # Fonts?
-  # Cursors?
-  #fonts.fontconfig.enable = true;
-  #fonts.fontconfig.defaultFonts.serif = "Ubuntu Regular";
+  gtk.iconTheme.name = "Obsidian-Purple";
+  
+  #Run Scripts
   
   #What version of Home Manager this config file was created at.
   home.stateVersion = "21.05";

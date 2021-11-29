@@ -11,6 +11,7 @@ in
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
+  nix.autoOptimiseStore = true;
   nixpkgs.config.allowUnfree = true;
   # Use the systemd-boot EFI boot loader.
   boot.initrd.supportedFilesystems = [ "zfs" ];
