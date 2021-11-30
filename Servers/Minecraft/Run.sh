@@ -2,4 +2,4 @@
 
 nix-shell --pure \
           -p "openjdk16" \
-          --run "ToRunScript.sh"
+          --run "cd TestServer; ./run.sh nogui"
