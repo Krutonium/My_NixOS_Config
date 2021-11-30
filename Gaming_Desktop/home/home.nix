@@ -44,6 +44,7 @@ in
     pkgs.lutris
     pkgs.mangohud
     (pkgs.multimc.override { msaClientID = "81a207c0-a53c-46a3-be07-57d2b28c1643"; })
+    unstable.openjdk17
     unstable.goverlay
     unstable.openrct2
     pkgs.vlc
