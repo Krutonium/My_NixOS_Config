@@ -32,6 +32,7 @@ in
   boot.kernelPackages = kernel;
   networking.hostName = "nixos-desktop"; # Define your hostname.
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+  networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
   systemd.enableEmergencyMode = false; # Disable Emergency Mode
 
   swapDevices = [{
@@ -41,6 +42,10 @@ in
   
   systemd.services = {
     zfs-mount = {
+      enable = false;
+      restartIfChanged = false;
+    };
+    network-addresses-wlp4s0 = {
       enable = false;
       restartIfChanged = false;
     };
