@@ -1,3 +1,4 @@
+git pull
 rm -rd ./home/
 rm -rd ./system/
 cp -R ~/.config/nixpkgs/ ./home/
