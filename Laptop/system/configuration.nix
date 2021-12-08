@@ -65,7 +65,7 @@ in
   };
 
   services.xserver.libinput.enable = true;
-
+  services.xserver.libinput.touchpad.tapping = true;
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   #hardware.nvidia.modesetting.enable = true;

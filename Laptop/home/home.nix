@@ -53,8 +53,9 @@ in
     pkgs.iconpack-obsidian
     pkgs.bibata-extra-cursors
     unstable.godot
+    pkgs.plex-media-player
+    pkgs.plexamp
   ];
-
 
   # Set up Dotfiles
   # Programs not explicitly supported can be done like this:
