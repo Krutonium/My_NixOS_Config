@@ -23,7 +23,7 @@
       fsType = "vfat";
     };
 
-  fileSystems."/steam" =
+  fileSystems."/home/krutonium/steam" =
     { device = "/dev/disk/by-uuid/55328800-cc45-4768-b68a-b2a91c14677c";
       fsType = "ext4";
     };

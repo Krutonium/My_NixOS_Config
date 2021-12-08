@@ -37,6 +37,10 @@ in
       enable = false;
       restartIfChanged = false;
     };
+    network-addresses-wlp5s0 = {
+      enable = false;
+      restartIfChanged = false;
+    };
   };
   
   # Set your time zone.
@@ -47,30 +51,40 @@ in
   # replicates the default behaviour.
   networking.useDHCP = false;
   networking.interfaces.eno1.useDHCP = true;
-  networking.interfaces.wlp4s0.useDHCP = true;
+  networking.interfaces.wlp5s0.useDHCP = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  # };
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+  };
+
+  services.xserver.libinput.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  hardware.nvidia.modesetting.enable = true;
+  #hardware.nvidia.modesetting.enable = true;
   programs.xwayland.enable = true;
-  services.xserver.displayManager.gdm.wayland = true;
-  services.xserver.displayManager.gdm.nvidiaWayland = true;
+  #services.xserver.displayManager.gdm.wayland = true;
+  #services.xserver.displayManager.gdm.nvidiaWayland = true;
   hardware.opengl.enable = true;
-  
-  #Enable nVidia with AMD as Primary
-  services.xserver.videoDrivers = [ "amdgpu" ];
-  boot.extraModulePackages = [ kernel.nvidia_x11 ];
+  hardware.opengl.driSupport32Bit = true;
+  #Enable Intel and nVidia
+  services.xserver.videoDrivers = [ "intel" "nvidia" ];
+  #hardware.bumblebee.enable = true;
+  #hardware.bumblebee.connectDisplay = true;
+  hardware.nvidia.prime = {
+    offload.enable = true;
+    #enable = true;
+    nvidiaBusId = "PCI:1:0:0"; 
+    intelBusId = "PCI:0:2:0";
+  };
+  #boot.extraModulePackages = [ kernel.nvidia_x11 ];
   boot.blacklistedKernelModules =  [ ]; 	
 
   # Enable the GNOME Desktop Environment.
@@ -104,7 +118,7 @@ in
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.krutonium = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "video" ]; # Enable ‘sudo’ for the user.
   };
 
   # List packages installed in system profile. To search, run:
@@ -114,6 +128,7 @@ in
     chrome-gnome-shell
     linuxPackages.nvidia_x11
     home-manager
+    #kernel.bbswitch
   ];
   programs.steam.enable = true;
   

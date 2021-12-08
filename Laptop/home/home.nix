@@ -52,6 +52,7 @@ in
     pkgs.openrgb
     pkgs.iconpack-obsidian
     pkgs.bibata-extra-cursors
+    unstable.godot
   ];
 
 
@@ -71,7 +72,7 @@ in
   gtk.enable = true;
   gtk.theme.name = "Sweet-Dark";
   gtk.iconTheme.name = "Obsidian-Purple";
-  gtk.cursorTheme.name = "Bibata_Dodger_Blue";  
+  #gtk.cursorTheme.name = "Bibata_Dodger_Blue";  
   #Run Scripts
   
   #What version of Home Manager this config file was created at.
