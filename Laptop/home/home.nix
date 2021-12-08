@@ -55,6 +55,7 @@ in
     unstable.godot
     pkgs.plex-media-player
     pkgs.plexamp
+    pkgs.transgui
   ];
 
   # Set up Dotfiles
