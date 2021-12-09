@@ -18,7 +18,7 @@ in
   home.sessionVariables.VISUAL = "nano";
   home.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
   programs.bash.enable = true;
-
+  programs.fish.enable = true;
   #Install our Packages
   home.packages = [ 
     pkgs.tdesktop 
@@ -56,6 +56,7 @@ in
     pkgs.plex-media-player
     pkgs.plexamp
     pkgs.transgui
+    pkgs.fish
   ];
 
   # Set up Dotfiles

@@ -116,10 +116,16 @@ in
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  programs.fish.enable = true;
+  programs.fish.useBabelfish = true;
   users.users.krutonium = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" ]; # Enable ‘sudo’ for the user.
   };
+  users.extraUsers.krutonium = {
+    shell = pkgs.fish;
+  };
+  
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
