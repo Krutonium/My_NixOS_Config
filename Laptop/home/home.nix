@@ -27,7 +27,7 @@ in
     pkgs.wget 
     pkgs.gnome.gnome-tweaks 
     pkgs.gnomeExtensions.dash-to-panel 
-    pkgs.gnomeExtensions.arcmenu 
+    unstable.gnomeExtensions.arcmenu 
     pkgs.arc-theme 
     pkgs.yaru-theme 
     pkgs.sweet 
@@ -57,6 +57,7 @@ in
     pkgs.plexamp
     pkgs.transgui
     pkgs.fish
+    pkgs.gitfs
   ];
 
   # Set up Dotfiles
