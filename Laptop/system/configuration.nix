@@ -20,7 +20,7 @@ in
   boot.kernelPackages = kernel;
   networking.hostName = "nixos-laptop"; # Define your hostname.
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
-  networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
+  networking.nameservers = [ "192.168.0.1" "8.8.8.8" "1.1.1.1" ];
   systemd.enableEmergencyMode = false; # Disable Emergency Mode
 
   swapDevices = [{
@@ -52,6 +52,10 @@ in
   networking.useDHCP = false;
   networking.interfaces.eno1.useDHCP = true;
   networking.interfaces.wlp5s0.useDHCP = true;
+
+  networking.hosts = {
+    "192.168.0.10" = [ "krutonium.ca" ];
+  };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
