@@ -134,7 +134,7 @@ in
     chrome-gnome-shell
     linuxPackages.nvidia_x11
     home-manager
-    #kernel.bbswitch
+    gitfs
   ];
   programs.steam.enable = true;
   

@@ -57,7 +57,6 @@ in
     pkgs.plexamp
     pkgs.transgui
     pkgs.fish
-    pkgs.gitfs
   ];
 
   # Set up Dotfiles
