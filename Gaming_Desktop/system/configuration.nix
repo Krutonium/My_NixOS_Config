@@ -12,6 +12,7 @@ in
       ./hardware-configuration.nix
     ];
   nix.autoOptimiseStore = true;
+  time.hardwareClockInLocalTime = true;
   nixpkgs.config.allowUnfree = true;
   # Use the systemd-boot EFI boot loader.
   boot.initrd.supportedFilesystems = [ "zfs" ];
@@ -32,7 +33,7 @@ in
   boot.kernelPackages = kernel;
   networking.hostName = "nixos-desktop"; # Define your hostname.
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
-  networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
+  networking.nameservers = [ "192.168.0.10" ];
   systemd.enableEmergencyMode = false; # Disable Emergency Mode
 
   swapDevices = [{

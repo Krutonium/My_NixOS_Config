@@ -12,6 +12,4 @@ rm $NanoPath
 ln -s ~/.config/nixpkgs/config/nano.conf $NanoPath
 
 # Setting Theme Stuff
-gsettings set org.gnome.desktop.interface cursor-theme 'Yaru'
-gsettings set org.gnome.desktop.interface icon-theme 'Obsidian-Purple'
-gsettings set org.gnome.desktop.interface sound-theme 'Yaru'
+

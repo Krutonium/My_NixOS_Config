@@ -21,13 +21,13 @@ in
 
   #Install our Packages
   home.packages = [ 
-    pkgs.kotatogram-desktop 
+    unstable.tdesktop 
     pkgs.discord 
     pkgs.firefox 
     pkgs.wget 
     pkgs.gnome.gnome-tweaks 
     pkgs.gnomeExtensions.dash-to-panel 
-    pkgs.gnomeExtensions.arcmenu 
+    unstable.gnomeExtensions.arcmenu 
     pkgs.arc-theme 
     pkgs.yaru-theme 
     pkgs.sweet 
