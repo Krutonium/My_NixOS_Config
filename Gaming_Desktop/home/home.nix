@@ -6,6 +6,9 @@ let
  
 in
 {
+  imports = [
+    ./dconf.nix
+  ];    
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   nixpkgs.config.allowUnfree = true; 
@@ -51,6 +54,7 @@ in
     pkgs.nanorc
     pkgs.openrgb
     pkgs.iconpack-obsidian
+    pkgs.bibata-extra-cursors
   ];
 
 
@@ -65,13 +69,6 @@ in
     userName = "Krutonium";
     userEmail = "PFCKrutonium@gmail.com";
   }; 
-  
-  # Theme
-  gtk.enable = true;
-  gtk.theme.name = "Sweet-Dark";
-  gtk.iconTheme.name = "Obsidian-Purple";
-  
-  #Run Scripts
   
   #What version of Home Manager this config file was created at.
   home.stateVersion = "21.05";
