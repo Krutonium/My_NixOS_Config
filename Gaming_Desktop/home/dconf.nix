@@ -7,7 +7,7 @@ let
   mainTheme = "Sweet-Dark"; #Application Theme
   mainFont = "Ubuntu 11";
   monoFont = "Ubuntu Mono 13";
-  cursorTheme = "Bibata_Dodger_Blue";
+  cursorTheme = "Bibata-Modern-DodgerBlue";
   iconTheme = "Obsidian-Purple";
   soundTheme = "Yaru";
 in

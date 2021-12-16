@@ -21,7 +21,6 @@ in
   home.sessionVariables.VISUAL = "nano";
   home.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
   programs.bash.enable = true;
-
   #Install our Packages
   home.packages = [ 
     unstable.tdesktop 
@@ -34,9 +33,14 @@ in
     pkgs.arc-theme 
     pkgs.yaru-theme 
     pkgs.sweet 
-    pkgs.ubuntu_font_family 
+    pkgs.ubuntu_font_family
+    (with pkgs.dotnetCorePackages; combinePackages [
+      sdk_3_1
+      sdk_5_0
+      sdk_6_0 
+      ])
     pkgs.jetbrains.rider 
-    pkgs.dotnetCorePackages.sdk_5_0 
+    pkgs.github-desktop
     pkgs.mono
     pkgs.htop
     pkgs.neofetch
@@ -55,6 +59,9 @@ in
     pkgs.openrgb
     pkgs.iconpack-obsidian
     pkgs.bibata-extra-cursors
+    pkgs.gnome.dconf-editor
+    pkgs.jstest-gtk
+    pkgs.quassel
   ];
 
 

@@ -27,13 +27,14 @@ in
     useOSProber = true;
     default = "saved";
   };
+  services.quassel.enable = true; #IRC Client
   boot.kernelParams = [ "iommu=soft" ];	
   #VL805 Bug
   boot.kernelModules = [ "amdgpu" ];
   boot.kernelPackages = kernel;
   networking.hostName = "nixos-desktop"; # Define your hostname.
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
-  networking.nameservers = [ "192.168.0.10" ];
+  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
   systemd.enableEmergencyMode = false; # Disable Emergency Mode
 
   swapDevices = [{
