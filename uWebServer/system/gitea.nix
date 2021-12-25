@@ -37,17 +37,6 @@
         #'';
       };
 
-      services.postgresql = {
-        enable = true;                # Ensure postgresql is enabled
-        authentication = ''
-          local gitea all ident map=gitea-users
-        '';
-        identMap =                    # Map the gitea user to postgresql
-          ''
-            gitea-users gitea gitea
-          '';
-      };
-
       services.nginx = {
         enable = true;                                          # Enable Nginx
         recommendedGzipSettings = true;

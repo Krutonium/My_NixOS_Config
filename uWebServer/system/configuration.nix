@@ -3,21 +3,27 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
+let
+  nixpkgs-unstable = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/nixpkgs-unstable)
+  {config = config.nixpkgs.config;};
+in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./firewall.nix
-      ./transmission.nix
+      ./torrent.nix
       ./gitea.nix
       ./plex.nix
       ./dynmap.nix
       ./users/resin.nix
       ./users/krutonium.nix
-      ./homeassistant.nix
+      ./gameservers.nix
     ];
   nixpkgs.config.allowUnfree = true;
+  nix.autoOptimiseStore = true;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+  services.xserver.videoDrivers = [ "nvidia" ];
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -28,7 +34,8 @@
   boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
   boot.tmpOnTmpfs = true;
   networking.hostName = "uWebServer"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    
+# networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
   time.timeZone = "America/Toronto";
@@ -38,7 +45,7 @@
   # replicates the default behaviour.
   networking.useDHCP = false;
   networking.interfaces.enp0s25.useDHCP = true;
-
+  networking.interfaces.enp0s25.mtu=1000;
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -98,67 +105,59 @@
      neofetch
      git
      screen
-     ssh-chat
+     steamcmd
+     nixpkgs-unstable.plex
   ];
 
   security.acme.email = "PFCKrutonium@gmail.com";
   security.acme.acceptTerms = true;  
-  #Enable SSL
-  
- # users.mutableUsers = false;
- # users.users.krutonium = {
- #   isNormalUser = true;
- #   home = "/home/krutonium/";
- #   description = "Local Admin";
- #   extraGroups = [ "wheel" "networkmanager" "transmission"];
- #   password = "";
- #   openssh.authorizedKeys.keys = ["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCwlUAQPu27Tci5RubNf+ybNBif0c5SEBcLV+C2H36TEAddz/A3q8l4Jgfbyg04ycOe8Cldlh5jZVqOiPexoM9pJ+B4oOKmvVEynr30VS5unptPblbOyWIYhj3QtjGT9grzj/3N9W8ACzNhXnMOs0DZwe1ytAWw0BUe5BUbrLcEPKiZvlitZvxUF3Q6/MI7FffUmmpmmccLZXA9chygs3I28vT8YOWfgbegydX1X1zXbDcaV+/m5eJtLAWNLTmFbyL0G5aPBqEKNQg9YitMK0cJqcFaXQEX0bT2jaJdGUJcp3XB50/1D0s727NWPfuqpE+POjhYjuSp64z3/22HyjDK1WyWhTUhTM1PYQogyv6kaIGz8i5qZ5fc5QMHKBAmvXz/dxPywvUtylqOnMlmPmIzezoYuD6okq2altPfEKc3kQ+Ah+tv0XPlxxzh5ID8HZVLP4JV+HCzUoSc8KYKEMUL0GzMmgd1Td16bp70waK3R8uBBDVfjesfqf7vRVS99Ns= krutonium@krutonium-pc"];
- # };
+  #Enable SSL^
 
   users.users.root = {
     hashedPassword = "*";
   };
+
   services.openssh.permitRootLogin = "no";
   services.samba = {
     enable = true;
     securityType = "user";
-    extraConfig = ''
-      workgroup = WORKGROUP
-      server string = smbnix
-      netbios name = smbnix
-      security = user 
-      #use sendfile = yes
-      #max protocol = smb2
-      hosts allow = 192.168.0  localhost
-      hosts deny = 0.0.0.0/0
-      guest account = nobody
-      map to guest = bad user
-    '';
-  shares = {
-    private = {
-      path = "/media";
-      browseable = "yes";
-      "read only" = "no";
-      "guest ok" = "no";
-      "create mask" = "0644";
-      "directory mask" = "0755";
-      "force user" = "krutonium";
-      "force group" = "krutonium";
+    shares = {
+      media = {
+        path = "/media";
+        browseable = true;
+        "read only" = "no";
+      };
+      home = {
+        path = "/home/krutonium";
+        browseable = true;
+        "read only" = "no";
+      };
+      torrents = {
+        path = "/transmission";
+        browseable = true;
+        "read only" = "no";
       };
     };
   };
-
-
-  
   services.avahi = {
     enable = true;
     publish = {
       enable = true;
       addresses = true;
       workstation = true;
+      domain = true;
+      hinfo = true;
+      userServices = true;
     };
   };
 
+
+  services.nginx.virtualHosts."krutonium.ca" = {
+    addSSL = true;
+    enableACME = true;
+    root = "/var/www/home/";
+    #basicAuth = { user = "password"; };
+  };
   
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
