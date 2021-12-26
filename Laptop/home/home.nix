@@ -6,6 +6,10 @@ let
  
 in
 {
+  imports = 
+    [
+#      ./dconf.nix
+    ];
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   nixpkgs.config.allowUnfree = true; 
@@ -23,7 +27,7 @@ in
   home.packages = [ 
     pkgs.tdesktop 
     pkgs.discord 
-    pkgs.firefox 
+    unstable.firefox 
     pkgs.wget 
     pkgs.gnome.gnome-tweaks 
     pkgs.gnomeExtensions.dash-to-panel 
@@ -57,6 +61,7 @@ in
     pkgs.plexamp
     pkgs.transgui
     pkgs.fish
+    pkgs.p7zip
   ];
 
   # Set up Dotfiles
