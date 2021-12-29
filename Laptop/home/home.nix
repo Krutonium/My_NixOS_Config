@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   unstable = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/nixpkgs-unstable)
   # reuse the current configuration
@@ -50,7 +50,8 @@ in
     (pkgs.multimc.override { msaClientID = "81a207c0-a53c-46a3-be07-57d2b28c1643"; })
     pkgs.openjdk17
     pkgs.goverlay
-    pkgs.openrct2
+    unstable.openrct2
+    #unstable.mesa
     pkgs.vlc
     pkgs.nanorc
     pkgs.openrgb
@@ -62,8 +63,9 @@ in
     pkgs.transgui
     pkgs.fish
     pkgs.p7zip
+    unstable.dolphin-emu-beta
   ];
-
+  
   # Set up Dotfiles
   # Programs not explicitly supported can be done like this:
   #home.file.".nanorc".source = mkLink.to "./config/nano.cfg";
